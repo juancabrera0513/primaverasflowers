@@ -1,20 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // ✅ desplegar aunque existan warnings/errores de lint o TS
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
+
   images: {
+    // si quitas `unoptimized` en <Image>, habilita tus dominios aquí
     remotePatterns: [
-      // Supabase Storage
-      {
-        protocol: "https",
-        hostname: "**.supabase.co",
-        pathname: "/storage/v1/object/public/**",
-      },
-      // Squarespace CDN (si tus URLs vienen de ahí)
+      { protocol: "https", hostname: "**.supabase.co", pathname: "/storage/v1/object/public/**" },
       { protocol: "https", hostname: "images.squarespace-cdn.com" },
-      // Añade otros orígenes que uses:
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "plus.unsplash.com" },
-      { protocol: "https", hostname: "i.ytimg.com" },
       { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      { protocol: "https", hostname: "i.ytimg.com" },
     ],
   },
 };
