@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 import { clsx } from "clsx";
 
 type Lang = "en" | "es";
@@ -11,7 +12,7 @@ type Props = {
   lang?: Lang;
   brand?: string;
   enableLangSwitch?: boolean;
-  logoSrc?: string; // /public/logo-mark.png
+  logoSrc?: string; // e.g. /logo-mark.png
 };
 
 function NavItem({
@@ -53,9 +54,19 @@ export default function Header({
   const base = pathname.replace(/^\/(en|es)/, "") || "/";
   const otherLang: Lang = lang === "en" ? "es" : "en";
 
+  // Cerrar el menú mobile cuando cambia la ruta
+  const detailsRef = useRef<HTMLDetailsElement>(null);
+  const closeMobile = () => {
+    if (detailsRef.current?.open) detailsRef.current.open = false;
+  };
+  useEffect(() => {
+    closeMobile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
   // About → Catalog → Contact
   const nav = [
-    { slug: "/about",   label: lang === "es" ? "Acerca"   : "About"   },
+    { slug: "/about", label: lang === "es" ? "Acerca" : "About" },
     { slug: "/catalog", label: lang === "es" ? "Catálogo" : "Catalog" },
     { slug: "/contact", label: lang === "es" ? "Contacto" : "Contact" },
   ];
@@ -64,25 +75,25 @@ export default function Header({
     <header
       className={clsx(
         "sticky top-0 z-50",
-        // Fondo SOLID para contraste: olive 900
         "bg-[color:var(--olive-900,#3E4732)]",
         "shadow-[0_8px_24px_rgba(0,0,0,.22)]"
       )}
       role="banner"
     >
       <div className="container-narrow h-18 md:h-20 flex items-center justify-between">
-        {/* Brand + Logo más grande */}
+        {/* Brand + Logo (sin aro, más grande) */}
         <Link
           href={`/${lang}`}
           className="group inline-flex items-center gap-3 md:gap-4 text-white"
           aria-label={brand}
+          onClick={closeMobile}
         >
-          <span className="relative inline-flex h-11 w-11 md:h-12 md:w-12 overflow-hidden rounded-full ring-2 ring-white/70">
+          <span className="relative inline-flex h-12 w-12 md:h-14 md:w-14 overflow-hidden rounded-full">
             <Image
               src={logoSrc}
               alt={`${brand} logo`}
               fill
-              sizes="48px"
+              sizes="56px"
               className="object-cover"
               priority
             />
@@ -92,12 +103,11 @@ export default function Header({
             <span className="text-lg md:text-2xl font-extrabold tracking-tight text-white">
               {brand}
             </span>
-            {/* Si quieres subtítulo, descomenta */}
             {/* <span className="text-[11px] md:text-xs font-medium text-white/80">Flowers · Same-day delivery</span> */}
           </span>
         </Link>
 
-        {/* Desktop nav con mayor tamaño y contraste */}
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-7 group/nav">
           {nav.map((item) => {
             const href = `/${lang}${item.slug}`;
@@ -109,7 +119,7 @@ export default function Header({
             );
           })}
 
-          {/* Toggle EN/ES más grande y con borde notorio */}
+          {/* Language switch */}
           {enableLangSwitch && (
             <div
               className="ml-2 flex items-center rounded-2xl p-1 bg-white/10 ring-2 ring-white/40"
@@ -143,8 +153,8 @@ export default function Header({
           )}
         </nav>
 
-        {/* Mobile menu con contraste alto */}
-        <details className="md:hidden relative group">
+        {/* Mobile menu */}
+        <details ref={detailsRef} className="md:hidden relative group">
           <summary
             className={clsx(
               "list-none cursor-pointer select-none",
@@ -165,6 +175,7 @@ export default function Header({
                   <Link
                     key={href}
                     href={href}
+                    onClick={closeMobile}
                     className={clsx(
                       "rounded-xl px-3 py-2 text-[15px] font-semibold",
                       active ? "bg-black/5" : "hover:bg-black/5"
@@ -186,6 +197,7 @@ export default function Header({
                   <div className="flex items-center gap-1.5">
                     <Link
                       href={`/en${base}`}
+                      onClick={closeMobile}
                       className={clsx(
                         "px-3 py-1.5 text-xs font-bold rounded-lg",
                         lang === "en"
@@ -197,6 +209,7 @@ export default function Header({
                     </Link>
                     <Link
                       href={`/es${base}`}
+                      onClick={closeMobile}
                       className={clsx(
                         "px-3 py-1.5 text-xs font-bold rounded-lg",
                         lang === "es"
