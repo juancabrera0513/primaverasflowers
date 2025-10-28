@@ -1,0 +1,17 @@
+{
+  "kpis": {
+    "title": "Indicadores",
+    "ordersToday": "Pedidos Hoy",
+    "revenue": "Ingresos"
+  },
+  "products": {
+    "title": "Productos",
+    "new": "Nuevo Producto"
+  },
+  "orders": {
+    "title": "Pedidos"
+  },
+  "settings": {
+    "title": "Configuraci\u00f3n"
+  }
+}

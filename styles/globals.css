@@ -1,0 +1,194 @@
+/* app/globals.css */
+
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   PALETA (Japandi + marca)
+   ========================= */
+:root{
+  /* Japandi */
+  --j-offwhite: #F6F2EA;  /* base de fondo */
+  --j-sand:     #D8CABC;  /* “sand / latte” */
+  --j-sage:     #A3A28A;  /* sage */
+  --j-olive:    #7A8464;  /* olive */
+  --j-gray:     #6B6F73;  /* smokey gray */
+
+  /* Marca */
+  --terracotta: #B26A55;  /* botón principal */
+  --text:       #111827;  /* slate-900 */
+  --text-soft:  #374151;  /* slate-700 */
+  --border:     rgba(17,24,39,.08);
+  --card:       rgba(255,255,255,.86); /* tarjetas semitransp para dejar ver el fondo */
+}
+
+/* ================
+   BASE & RESET
+   ================ */
+html, body { min-height: 100%; }
+html { scroll-behavior: smooth; }
+/* Fondo de marco floral a FULL BLEED (pega a las esquinas) */
+body {
+  background: #fff;           /* color del centro (cambia si quieres) */
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;            /* permanece mientras haces scroll */
+  inset: 0;                   /* pega a top/right/bottom/left = 0 */
+  background-image: url("/decor/floral-frame.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  /* CLAVE: que ocupe 100% del ancho y 100% del alto del viewport */
+  background-size: 100% 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* iOS/Safari móvil: fallback para evitar saltos con 'fixed' */
+@supports (-webkit-touch-callout: none) {
+  body::before {
+    position: absolute;
+    height: 100dvh;
+  }
+}
+
+/* =========================
+   UTILIDADES DE LAYOUT
+   ========================= */
+.page-shell{
+  min-height: 100dvh;
+  padding-block: 16px;
+}
+.container-narrow{
+  margin-inline: auto;
+  padding-inline: 1rem;
+  max-width: 1100px;
+}
+
+/* Tipografía agradable */
+h1,h2,h3,h4{ letter-spacing: -0.01em; }
+h1{ font-weight: 700; }
+h2,h3{ font-weight: 600; }
+p.lead{ color: var(--text-soft); }
+
+/* =========================
+   HEADER / NAV (Japandi)
+   =========================
+   - Fondo off-white translúcido con blur para que el marco se vea detrás.
+*/
+.site-header{
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(120%) blur(8px);
+  background: color-mix(in oklab, var(--j-offwhite) 88%, transparent);
+  border-bottom: 1px solid var(--border);
+}
+.site-header .nav-link{
+  color: var(--text);
+}
+.site-header .nav-link:hover{
+  color: var(--terracotta);
+}
+
+/* =========================
+   TARJETAS / PANELES
+   ========================= */
+.card{
+  @apply rounded-3xl border;
+  background: var(--card);
+  border-color: var(--border);
+}
+.panel{
+  @apply rounded-2xl border;
+  background: color-mix(in oklab, var(--j-offwhite) 92%, white 8%);
+  border-color: var(--border);
+}
+
+/* =========================
+   BOTONES (marca)
+   ========================= */
+.btn-primary{
+  @apply inline-flex items-center justify-center h-11 px-5 rounded-2xl text-sm font-medium text-white shadow-sm;
+  background: var(--terracotta);
+}
+.btn-primary:hover{ filter: brightness(0.95); }
+
+.btn-ghost{
+  @apply inline-flex items-center justify-center h-11 px-5 rounded-2xl text-sm font-medium border;
+  background: color-mix(in oklab, white 60%, transparent);
+}
+
+/* =========================
+   FILTROS / CHIPS
+   ========================= */
+.chip{
+  @apply inline-flex items-center h-9 px-3 rounded-xl text-sm border;
+  background: color-mix(in oklab, white 70%, transparent);
+  border-color: var(--border);
+}
+.chip--active{
+  color: white;
+  background: var(--olive, var(--j-olive));
+  border-color: transparent;
+}
+
+/* =========================
+   SCROLLBAR suave (opcional)
+   ========================= */
+*{
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--j-gray) 35%, transparent) transparent;
+}
+::-webkit-scrollbar{ height: 10px; width: 10px; }
+::-webkit-scrollbar-thumb{
+  background: color-mix(in oklab, var(--j-gray) 35%, transparent);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track{ background: transparent; }
+
+/* =========================
+   AYUDAS
+   ========================= */
+/* Para cualquier bloque que deba “levitar” sobre el marco */
+.surface{
+  background: color-mix(in oklab, white 90%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+}
+
+/* Evita que elementos full-width tapen el marco con blanco sólido */
+.bg-transparent-important{ background: transparent !important; }
+
+:root{
+  --ink-900:#0F172A;   /* títulos */
+  --ink-800:#1F2937;   /* texto principal */
+  --ink-600:#475569;   /* texto secundario */
+  --bg-dim: .80;       /* opacidad del velo sobre la imagen (0–1) */
+}
+
+/* Colores de texto sobre fondos claros */
+body{ color: var(--ink-800); }
+h1,h2,h3,h4{ color: var(--ink-900); }
+p,.muted{ color: var(--ink-600); }
+
+/* === Marco floral a pantalla completa (como ya tenías) === */
+body{ background:#fff; position:relative; }
+body::before{
+  content:""; position:fixed; inset:0;
+  background: url("/decor/floral-frame.png") no-repeat center / 100% 100%;
+  z-index:-2; pointer-events:none;
+}
+
+/* === NUEVO: velo blanco encima de la imagen para bajarle intensidad === */
+body::after{
+  content:""; position:fixed; inset:0;
+  background: rgba(255,255,255,var(--bg-dim));
+  z-index:-1; pointer-events:none;
+}
+/* iOS fallback */
+@supports (-webkit-touch-callout:none){
+  body::before, body::after{ position:absolute; height:100dvh; }
+}

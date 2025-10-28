@@ -1,0 +1,17 @@
+{
+  "kpis": {
+    "title": "Dashboard KPIs",
+    "ordersToday": "Orders Today",
+    "revenue": "Revenue"
+  },
+  "products": {
+    "title": "Products",
+    "new": "New Product"
+  },
+  "orders": {
+    "title": "Orders"
+  },
+  "settings": {
+    "title": "Settings"
+  }
+}

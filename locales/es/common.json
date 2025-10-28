@@ -1,0 +1,56 @@
+{
+  "brand": "Primavera Flowers",
+  "footer": {
+    "rights": "Todos los derechos reservados."
+  },
+  "nav": {
+    "catalog": "Cat\u00e1logo",
+    "about": "Nosotros",
+    "contact": "Contacto",
+    "cart": "Carrito",
+    "checkout": "Pagar",
+    "dashboard": "Panel",
+    "login": "Ingresar",
+    "logout": "Salir"
+  },
+  "home": {
+    "headline": "Flores frescas, sonrisas en el mismo d\u00eda.",
+    "sub": "Ordene antes de las 2:00 PM para entrega en el mismo d\u00eda.",
+    "ctaShop": "Comprar",
+    "ctaAbout": "Con\u00f3cenos"
+  },
+  "catalog": {
+    "title": "Cat\u00e1logo",
+    "categories": "Categor\u00edas",
+    "empty": "No hay productos."
+  },
+  "product": {
+    "addToCart": "A\u00f1adir al carrito",
+    "size": "Tama\u00f1o",
+    "addons": "Extras",
+    "messageCard": "Mensaje en tarjeta",
+    "acceptSubstitutions": "Acepto sustituciones",
+    "pickup": "Retiro en tienda",
+    "delivery": "Entrega local",
+    "deliveryPicker": {
+      "date": "Fecha de entrega",
+      "timeWindow": "Franja horaria",
+      "sameDayCutoff": "Pedidos despu\u00e9s de las 2:00 PM se entregan al d\u00eda siguiente."
+    }
+  },
+  "cart": {
+    "title": "Tu Carrito",
+    "subtotal": "Subtotal",
+    "deliveryFee": "Tarifa de entrega",
+    "taxes": "Impuestos (estimado)",
+    "total": "Total",
+    "checkout": "Pagar"
+  },
+  "contact": {
+    "title": "Contacto",
+    "name": "Nombre",
+    "email": "Correo",
+    "message": "Mensaje",
+    "send": "Enviar"
+  }
+}
