@@ -1,21 +1,21 @@
-// next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "cdn.globalrose.com" },
-      { protocol: "https", hostname: "i.etsystatic.com" },
-      { protocol: "https", hostname: "asset.bloomnation.com" },
-      { protocol: "https", hostname: "cdn3.1800flowers.com" },
-      { protocol: "https", hostname: "cdn2.stylecraze.com" },
-      { protocol: "https", hostname: "5starflower.com" },
-      { protocol: "https", hostname: "growurban.uk" },
-      { protocol: "https", hostname: "cdn.shopify.com" },
+      // Supabase Storage
+      {
+        protocol: "https",
+        hostname: "**.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
+      // Squarespace CDN (si tus URLs vienen de ahí)
+      { protocol: "https", hostname: "images.squarespace-cdn.com" },
+      // Añade otros orígenes que uses:
       { protocol: "https", hostname: "images.unsplash.com" },
-      { protocol: "https", hostname: "picsum.photos" },
-      { protocol: "https", hostname: "www.surprose.com" }
+      { protocol: "https", hostname: "plus.unsplash.com" },
+      { protocol: "https", hostname: "i.ytimg.com" },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
     ],
   },
 };
-
 export default nextConfig;
