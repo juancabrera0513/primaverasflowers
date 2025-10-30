@@ -1,194 +1,207 @@
-/* app/globals.css */
+/* styles/globals.css
+   ——————————————————————————————————————————
+   - Tailwind layers
+   - Variables (Japandi + marca)
+   - Base & frame tint (fondo #E5D2B8 + floral-frame teñido)
+   - Utilidades de layout
+   - Componentes (card, panel, botones, chips)
+   - Scrollbar y helpers
+   —————————————————————————————————————————— */
 
-/* Tailwind */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* =========================
-   PALETA (Japandi + marca)
-   ========================= */
-:root{
-  /* Japandi */
-  --j-offwhite: #F6F2EA;  /* base de fondo */
-  --j-sand:     #D8CABC;  /* “sand / latte” */
-  --j-sage:     #A3A28A;  /* sage */
-  --j-olive:    #7A8464;  /* olive */
-  --j-gray:     #6B6F73;  /* smokey gray */
-
-  /* Marca */
-  --terracotta: #B26A55;  /* botón principal */
-  --text:       #111827;  /* slate-900 */
-  --text-soft:  #374151;  /* slate-700 */
-  --border:     rgba(17,24,39,.08);
-  --card:       rgba(255,255,255,.86); /* tarjetas semitransp para dejar ver el fondo */
-}
-
-/* ================
-   BASE & RESET
-   ================ */
-html, body { min-height: 100%; }
-html { scroll-behavior: smooth; }
-/* Fondo de marco floral a FULL BLEED (pega a las esquinas) */
-body {
-  background: #fff;           /* color del centro (cambia si quieres) */
-  position: relative;
-}
-
-body::before {
-  content: "";
-  position: fixed;            /* permanece mientras haces scroll */
-  inset: 0;                   /* pega a top/right/bottom/left = 0 */
-  background-image: url("/decor/floral-frame.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  /* CLAVE: que ocupe 100% del ancho y 100% del alto del viewport */
-  background-size: 100% 100%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* iOS/Safari móvil: fallback para evitar saltos con 'fixed' */
-@supports (-webkit-touch-callout: none) {
-  body::before {
-    position: absolute;
-    height: 100dvh;
-  }
-}
-
-/* =========================
-   UTILIDADES DE LAYOUT
-   ========================= */
-.page-shell{
-  min-height: 100dvh;
-  padding-block: 16px;
-}
-.container-narrow{
-  margin-inline: auto;
-  padding-inline: 1rem;
-  max-width: 1100px;
-}
-
-/* Tipografía agradable */
-h1,h2,h3,h4{ letter-spacing: -0.01em; }
-h1{ font-weight: 700; }
-h2,h3{ font-weight: 600; }
-p.lead{ color: var(--text-soft); }
-
-/* =========================
-   HEADER / NAV (Japandi)
-   =========================
-   - Fondo off-white translúcido con blur para que el marco se vea detrás.
-*/
-.site-header{
-  position: sticky; top: 0; z-index: 50;
-  backdrop-filter: saturate(120%) blur(8px);
-  background: color-mix(in oklab, var(--j-offwhite) 88%, transparent);
-  border-bottom: 1px solid var(--border);
-}
-.site-header .nav-link{
-  color: var(--text);
-}
-.site-header .nav-link:hover{
-  color: var(--terracotta);
-}
-
-/* =========================
-   TARJETAS / PANELES
-   ========================= */
-.card{
-  @apply rounded-3xl border;
-  background: var(--card);
-  border-color: var(--border);
-}
-.panel{
-  @apply rounded-2xl border;
-  background: color-mix(in oklab, var(--j-offwhite) 92%, white 8%);
-  border-color: var(--border);
-}
-
-/* =========================
-   BOTONES (marca)
-   ========================= */
-.btn-primary{
-  @apply inline-flex items-center justify-center h-11 px-5 rounded-2xl text-sm font-medium text-white shadow-sm;
-  background: var(--terracotta);
-}
-.btn-primary:hover{ filter: brightness(0.95); }
-
-.btn-ghost{
-  @apply inline-flex items-center justify-center h-11 px-5 rounded-2xl text-sm font-medium border;
-  background: color-mix(in oklab, white 60%, transparent);
-}
-
-/* =========================
-   FILTROS / CHIPS
-   ========================= */
-.chip{
-  @apply inline-flex items-center h-9 px-3 rounded-xl text-sm border;
-  background: color-mix(in oklab, white 70%, transparent);
-  border-color: var(--border);
-}
-.chip--active{
-  color: white;
-  background: var(--olive, var(--j-olive));
-  border-color: transparent;
-}
-
-/* =========================
-   SCROLLBAR suave (opcional)
-   ========================= */
-*{
-  scrollbar-width: thin;
-  scrollbar-color: color-mix(in oklab, var(--j-gray) 35%, transparent) transparent;
-}
-::-webkit-scrollbar{ height: 10px; width: 10px; }
-::-webkit-scrollbar-thumb{
-  background: color-mix(in oklab, var(--j-gray) 35%, transparent);
-  border-radius: 999px;
-}
-::-webkit-scrollbar-track{ background: transparent; }
-
-/* =========================
-   AYUDAS
-   ========================= */
-/* Para cualquier bloque que deba “levitar” sobre el marco */
-.surface{
-  background: color-mix(in oklab, white 90%, transparent);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-}
-
-/* Evita que elementos full-width tapen el marco con blanco sólido */
-.bg-transparent-important{ background: transparent !important; }
-
-:root{
-  --ink-900:#0F172A;   /* títulos */
-  --ink-800:#1F2937;   /* texto principal */
-  --ink-600:#475569;   /* texto secundario */
-  --bg-dim: .80;       /* opacidad del velo sobre la imagen (0–1) */
-}
-
-/* Colores de texto sobre fondos claros */
-body{ color: var(--ink-800); }
-h1,h2,h3,h4{ color: var(--ink-900); }
-p,.muted{ color: var(--ink-600); }
-
-/* === Marco floral a pantalla completa (como ya tenías) === */
-body{ background:#fff; position:relative; }
-body::before{
-  content:""; position:fixed; inset:0;
-  background: url("/decor/floral-frame.png") no-repeat center / 100% 100%;
-  z-index:-2; pointer-events:none;
-}
-
-/* === NUEVO: velo blanco encima de la imagen para bajarle intensidad === */
-body::after{
-  content:""; position:fixed; inset:0;
-  background: rgba(255,255,255,var(--bg-dim));
-  z-index:-1; pointer-events:none;
-}
-/* iOS fallback */
-@supports (-webkit-touch-callout:none){
-  body::before, body::after{ position:absolute; height:100dvh; }
-}
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+   
+   /* =========================
+      VARIABLES (Japandi + marca)
+      ========================= */
+   :root{
+     /* Fondo y tinte (pedido) */
+     --page-bg:   #E5D2B8; /* fondo global */
+     --frame-tint:#E5D2B8; /* tinte sobre el marco floral */
+     --frame-tint-alpha: .32; /* intensidad de tinte en móvil (0–1) */
+     --bg-dim: .50;           /* velo superior (0–1) */
+   
+     /* Paleta complementaria */
+     --j-offwhite: #F6F2EA;
+     --j-sand:     #D8CABC;
+     --j-sage:     #A3A28A;
+     --j-olive:    #7A8464;
+     --j-gray:     #6B6F73;
+   
+     /* Marca */
+     --terracotta: #B26A55;
+     --text:       #111827;
+     --text-soft:  #374151;
+     --border:     rgba(17,24,39,.08);
+     --card:       rgba(255,255,255,.86);
+     --ink-900:#0F172A;
+     --ink-800:#1F2937;
+     --ink-600:#475569;
+   }
+   
+   /* ================
+      BASE & FRAME TINT
+      ================ */
+   html, body { min-height: 100%; }
+   html { scroll-behavior: smooth; }
+   
+   body{
+     background: var(--page-bg);
+     color: var(--ink-800);
+     position: relative;
+   }
+   
+   /* =========================
+      FRAME FLORAL — DESKTOP
+      - “a los bordes” y con multiply (tinte fuerte)
+      ========================= */
+   body::before{
+     content:"";
+     position:fixed;
+     inset:0;
+     background:
+       linear-gradient(var(--frame-tint), var(--frame-tint)),        /* tinte */
+       image-set(                                                     /* imagen */
+         url("/decor/floral-frame.png") 1x,
+         url("/decor/floral-frame@2x.png") 2x
+       );
+     background-repeat: no-repeat, no-repeat;
+     background-position: center, center;
+     background-size: 100% 100%, 100% 100%;
+     background-blend-mode: multiply, normal; /* tinte × imagen */
+     z-index:-2;
+     pointer-events:none;
+   }
+   
+   /* ——— MÓVIL: usa cover y tinte con alpha (sin multiply) ——— */
+   @media (max-width: 640px){
+     body::before{
+       background:
+         /* tinte con alpha (sin blend-mode para compatibilidad iOS) */
+         linear-gradient(
+           color-mix(in oklab, var(--frame-tint) calc(var(--frame-tint-alpha)*100%), transparent),
+           color-mix(in oklab, var(--frame-tint) calc(var(--frame-tint-alpha)*100%), transparent)
+         ),
+         url("/decor/floral-frame.png");
+       background-repeat: no-repeat, no-repeat;
+       background-position: center center, center center;
+       background-size: cover, cover;   /* que llene sin deformar */
+       background-blend-mode: normal, normal; /* SIN multiply en iOS */
+     }
+   
+     /* Velo un poco más suave para que se note el dibujo */
+     :root{ --bg-dim: .35; }
+   }
+   
+   /* Velo general (para bajar contraste y que el contenido “respire”) */
+   body::after{
+     content:"";
+     position:fixed; inset:0;
+     background: rgba(255,255,255,var(--bg-dim));
+     z-index:-1;
+     pointer-events:none;
+   }
+   
+   /* iOS/Safari móvil: evita saltos con position:fixed */
+   @supports (-webkit-touch-callout:none){
+     body::before, body::after{ position:absolute; height:100dvh; }
+   }
+   
+   /* Tipografía */
+   h1,h2,h3,h4{ letter-spacing:-0.01em; color:var(--ink-900); }
+   p,.muted{ color: var(--ink-600); }
+   
+   /* =========================
+      UTILIDADES DE LAYOUT
+      ========================= */
+   .page-shell{ min-height:100dvh; padding-block:16px; }
+   .container-narrow{ margin-inline:auto; padding-inline:1rem; max-width:1100px; }
+   
+   /* =========================
+      HEADER / NAV
+      ========================= */
+   .site-header{
+     position:sticky; top:0; z-index:50;
+     backdrop-filter: saturate(120%) blur(8px);
+     background: color-mix(in oklab, var(--j-offwhite) 88%, transparent);
+     border-bottom: 1px solid var(--border);
+   }
+   .site-header .nav-link{ color:var(--text); }
+   .site-header .nav-link:hover{ color:var(--terracotta); }
+   
+   /* =========================
+      TARJETAS / PANELES
+      ========================= */
+   .card{
+     border-radius:1.5rem;
+     border:1px solid var(--border);
+     background: var(--card);
+     box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+   }
+   .panel{
+     border-radius:1.5rem;
+     border:1px solid var(--border);
+     background: color-mix(in oklab, var(--j-offwhite) 92%, white 8%);
+   }
+   
+   /* =========================
+      BOTONES
+      ========================= */
+   .btn-primary{
+     @apply inline-flex items-center justify-center;
+     height: 2.75rem;
+     border-radius: 1.5rem;
+     padding-inline: 1.25rem;
+     font-size: .875rem; line-height:1.25rem; font-weight:500;
+     color:#fff;
+     background: var(--terracotta);
+     box-shadow: 0 1px 2px rgba(0,0,0,.05);
+   }
+   .btn-primary:hover{ filter: brightness(0.95); }
+   
+   .btn-ghost{
+     @apply inline-flex items-center justify-center;
+     height: 2.75rem;
+     border-radius: 1.5rem;
+     padding-inline: 1.25rem;
+     font-size:.875rem; line-height:1.25rem; font-weight:500;
+     background: color-mix(in oklab, white 60%, transparent);
+     border:1px solid var(--border);
+   }
+   
+   /* =========================
+      CHIPS
+      ========================= */
+   .chip{
+     display:inline-flex; height:2.25rem; align-items:center;
+     border-radius:1rem; border:1px solid var(--border);
+     padding-inline:.75rem; font-size:.875rem; line-height:1.25rem;
+     background: color-mix(in oklab, white 70%, transparent);
+   }
+   .chip--active{ color:#fff; background: var(--j-olive); border-color:transparent; }
+   
+   /* =========================
+      SCROLLBAR
+      ========================= */
+   *{
+     scrollbar-width: thin;
+     scrollbar-color: color-mix(in oklab, var(--j-gray) 35%, transparent) transparent;
+   }
+   ::-webkit-scrollbar{ height:10px; width:10px; }
+   ::-webkit-scrollbar-thumb{
+     background: color-mix(in oklab, var(--j-gray) 35%, transparent);
+     border-radius:999px;
+   }
+   ::-webkit-scrollbar-track{ background: transparent; }
+   
+   /* =========================
+      HELPERS
+      ========================= */
+   .surface{
+     background: color-mix(in oklab, white 90%, transparent);
+     border: 1px solid var(--border);
+     border-radius: 24px;
+   }
+   .bg-transparent-important{ background: transparent !important; }
+   

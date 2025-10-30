@@ -15,8 +15,6 @@ type Props = {
   primaryLabel?: string;
   secondaryLabel?: string;
   features?: string[];     // chips
-  // Si quieres un fondo propio, pásalo; si no, usamos el floral sutil por defecto
-  backgroundImageUrl?: string; // e.g. "/hero/floral-soft.png"
 };
 
 export default function Hero({
@@ -36,41 +34,21 @@ export default function Hero({
     lang === "es" ? "Hecho a mano" : "Handcrafted",
     lang === "es" ? "Entrega local" : "Local delivery",
   ],
-  backgroundImageUrl = "/bg/floral-soft.png",
 }: Props) {
   return (
     <section
-      className="relative overflow-hidden"
-      aria-label={lang === "es" ? "Sección principal" : "Hero section"}
-      style={{
-        // Degradados suaves + imagen floral en las esquinas
-        background:
-          "radial-gradient(1200px 600px at 0% -10%, rgba(255,107,79,0.15), transparent 55%), radial-gradient(900px 500px at 100% 0%, rgba(255,172,130,0.12), transparent 60%), linear-gradient(180deg,#fff, #fff)",
-      }}
-    >
-      {/* Fondo floral sutil (corners) */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.22]"
-        style={{
-          backgroundImage: `url(${backgroundImageUrl})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          maskImage:
-            "radial-gradient(1200px 600px at 0% 0%, black, transparent 70%), radial-gradient(1200px 600px at 100% 0%, black, transparent 70%)",
-          WebkitMaskImage:
-            "radial-gradient(1200px 600px at 0% 0%, black, transparent 70%), radial-gradient(1200px 600px at 100% 0%, black, transparent 70%)",
-        }}
-      />
-
+    className="relative overflow-hidden"
+    aria-label={lang === "es" ? "Sección principal" : "Hero section"}
+    style={{ background: "var(--hero-bg)" }}   // ← usa la variable
+  >
+  
       <div className="container mx-auto px-4">
         <div className="relative mx-auto max-w-4xl py-16 md:py-24 text-center">
           {/* Eyebrow */}
           <span
             className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold"
             style={{
-              background: "rgba(255,107,79,0.10)",
+              background: "rgba(165,90,72,0.10)", // usa el terracotta como base suave
               color: "var(--terracotta, #A55A48)",
             }}
           >
@@ -90,7 +68,7 @@ export default function Hero({
           </h1>
 
           {/* Subtitle */}
-          <p className="mx-auto mt-4 max-w-3xl text-lg md:text-xl text-[color:var(--ink-600,#475569)]">
+          <p className="mx-auto mt-4 max-w-3xl text-lg md:text-xl text-[color:var(--ink-700,#374151)]">
             {subtitle}
           </p>
 
@@ -117,7 +95,7 @@ export default function Hero({
                 "bg-white/70 backdrop-blur hover:bg-white"
               )}
               style={{
-                borderColor: "rgba(17,24,39,0.08)",
+                borderColor: "rgba(17,24,39,0.10)",
                 color: "var(--ink-900,#0F172A)",
               }}
             >
@@ -131,11 +109,13 @@ export default function Hero({
               {features.map((f, i) => (
                 <span
                   key={i}
-                  className="inline-flex items-center gap-2 rounded-full border bg-white/80 px-4 py-2 text-sm backdrop-blur"
+                  className="inline-flex items-center gap-2 rounded-full border bg-white/85 px-4 py-2 text-sm backdrop-blur"
                   style={{ borderColor: "rgba(17,24,39,0.10)", color: "var(--ink-800,#1F2937)" }}
                 >
-                  <span className="inline-block h-2 w-2 rounded-full"
-                        style={{ background: "var(--terracotta,#A55A48)" }} />
+                  <span
+                    className="inline-block h-2 w-2 rounded-full"
+                    style={{ background: "var(--terracotta,#A55A48)" }}
+                  />
                   {f}
                 </span>
               ))}
@@ -144,14 +124,13 @@ export default function Hero({
         </div>
       </div>
 
-      {/* Sombra fade bottom */}
+      {/* Suave fade al contenido siguiente */}
       <div
         aria-hidden
         className="pointer-events-none h-10 w-full"
         style={{
-          background:
-            "linear-gradient(180deg, rgba(0,0,0,0.06), transparent 70%)",
-          opacity: 0.15,
+          background: "linear-gradient(180deg, rgba(0,0,0,0.06), transparent 70%)",
+          opacity: 0.10,
         }}
       />
     </section>

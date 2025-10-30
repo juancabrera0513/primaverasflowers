@@ -1,7 +1,3 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/(i18n)/[lang]/(public)/contact/page": "app/(i18n)/[lang]/(public)/contact/page.js",
-  "/(i18n)/[lang]/(public)/about/page": "app/(i18n)/[lang]/(public)/about/page.js",
-  "/(i18n)/[lang]/(public)/catalog/page": "app/(i18n)/[lang]/(public)/catalog/page.js",
   "/(i18n)/[lang]/(public)/page": "app/(i18n)/[lang]/(public)/page.js"
 }
